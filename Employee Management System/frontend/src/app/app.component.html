@@ -1,0 +1,26 @@
+<div class="navbar">
+  <div class="navbar-content">
+    <h1 class="navbar-title">Employee Management System</h1>
+    <div class="navbar-tabs">
+      <button 
+        [class.active]="activeTab === 'department'"
+        (click)="switchTab('department')"
+        class="tab-btn"
+      >
+        Departments
+      </button>
+      <button 
+        [class.active]="activeTab === 'employee'"
+        (click)="switchTab('employee')"
+        class="tab-btn"
+      >
+        Employees
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+  <app-department *ngIf="activeTab === 'department'"></app-department>
+  <app-employee *ngIf="activeTab === 'employee'"></app-employee>
+</div>

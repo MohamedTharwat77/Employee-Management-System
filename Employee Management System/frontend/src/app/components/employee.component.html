@@ -1,0 +1,131 @@
+<div class="container">
+  <h2>Employee Management</h2>
+
+  <div class="search-container">
+    <input 
+      [(ngModel)]="searchKeyword" 
+      type="text" 
+      placeholder="Search by name or code"
+      class="search-input"
+    >
+    <button (click)="searchEmployees()" class="btn-search">Search</button>
+    <button (click)="loadEmployees()" class="btn-refresh">Refresh</button>
+  </div>
+  
+  <button (click)="isFormVisible = !isFormVisible" class="btn-primary">
+    {{ isFormVisible ? 'Hide Form' : 'Add Employee' }}
+  </button>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-banner">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="isFormVisible" class="form-container">
+    <h3>{{ editingId ? 'Edit Employee' : 'New Employee' }}</h3>
+    <form (ngSubmit)="saveEmployee()">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Code: <span class="required">*</span></label>
+          <input [(ngModel)]="newEmployee.code" name="code" required
+                 [class.input-error]="formSubmitted && validationErrors['code']">
+          <span *ngIf="formSubmitted && validationErrors['code']" class="field-error">
+            {{ validationErrors['code'] }}
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Name: <span class="required">*</span></label>
+          <input [(ngModel)]="newEmployee.name" name="name" required
+                 [class.input-error]="formSubmitted && validationErrors['name']">
+          <span *ngIf="formSubmitted && validationErrors['name']" class="field-error">
+            {{ validationErrors['name'] }}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date of Birth:</label>
+          <input [(ngModel)]="newEmployee.dateOfBirth" name="dateOfBirth" type="date">
+        </div>
+        <div class="form-group">
+          <label>Salary: <span class="required">*</span></label>
+          <input [(ngModel)]="newEmployee.salary" name="salary" type="number" step="0.01" required
+                 [class.input-error]="formSubmitted && validationErrors['salary']">
+          <span *ngIf="formSubmitted && validationErrors['salary']" class="field-error">
+            {{ validationErrors['salary'] }}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Department: <span class="required">*</span></label>
+          <select [(ngModel)]="selectedDepartmentId" name="departmentId" required
+                  [class.input-error]="formSubmitted && validationErrors['department']">
+            <option [ngValue]="null">Select Department</option>
+            <option *ngFor="let dept of departments" [ngValue]="dept.id">{{ dept.name }}</option>
+          </select>
+          <span *ngIf="formSubmitted && validationErrors['department']" class="field-error">
+            {{ validationErrors['department'] }}
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Mobile:</label>
+          <input [(ngModel)]="newEmployee.mobile" name="mobile" type="tel">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Address:</label>
+        <textarea [(ngModel)]="newEmployee.address" name="address"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Employee Image:</label>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" class="file-input">
+        <div *ngIf="imagePreview" class="image-preview">
+          <img [src]="imagePreview" alt="Employee Image Preview">
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-success">Save</button>
+        <button type="button" (click)="resetForm()" class="btn-secondary">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Salary</th>
+          <th>Mobile</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>
+            <img *ngIf="emp.imagePath" [src]="getImageUrl(emp.imagePath)" alt="Employee" class="employee-img">
+            <span *ngIf="!emp.imagePath" class="no-image">No Image</span>
+          </td>
+          <td>{{ emp.code }}</td>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.department?.name || 'N/A' }}</td>
+          <td>{{ emp.salary | currency }}</td>
+          <td>{{ emp.mobile }}</td>
+          <td>
+            <button (click)="editEmployee(emp)" class="btn-edit">Edit</button>
+            <button (click)="deleteEmployee(emp.id)" class="btn-delete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

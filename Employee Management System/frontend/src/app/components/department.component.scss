@@ -1,0 +1,178 @@
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.error-banner {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px 16px;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.field-error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.required {
+  color: #dc3545;
+}
+
+.input-error {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.3) !important;
+}
+
+h3 {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 5px;
+
+  &.btn-primary {
+    background-color: #007bff;
+    color: white;
+    
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  &.btn-success {
+    background-color: #28a745;
+    color: white;
+    
+    &:hover {
+      background-color: #218838;
+    }
+  }
+
+  &.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    
+    &:hover {
+      background-color: #5a6268;
+    }
+  }
+
+  &.btn-edit {
+    background-color: #ffc107;
+    color: #333;
+    
+    &:hover {
+      background-color: #ffb300;
+    }
+  }
+
+  &.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+}
+
+.form-container {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      input,
+      textarea {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+
+        &:focus {
+          outline: none;
+          border-color: #007bff;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+    }
+
+    button {
+      align-self: flex-start;
+    }
+  }
+}
+
+.table-container {
+  overflow-x: auto;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    thead {
+      background-color: #007bff;
+      color: white;
+
+      th {
+        padding: 12px;
+        text-align: left;
+        font-weight: bold;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #ddd;
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+
+        td {
+          padding: 12px;
+        }
+      }
+    }
+  }
+}

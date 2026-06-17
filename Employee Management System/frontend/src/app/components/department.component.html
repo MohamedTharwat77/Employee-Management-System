@@ -1,0 +1,60 @@
+<div class="container">
+  <h2>Department Management</h2>
+  
+  <button (click)="isFormVisible = !isFormVisible" class="btn-primary">
+    {{ isFormVisible ? 'Hide Form' : 'Add Department' }}
+  </button>
+
+
+  <div *ngIf="isFormVisible" class="form-container">
+    <h3>{{ editingId ? 'Edit Department' : 'New Department' }}</h3>
+    <form (ngSubmit)="saveDepartment()">
+      <div>
+        <label>Code: <span class="required">*</span></label>
+        <input [(ngModel)]="newDepartment.code" name="code" required
+               [class.input-error]="formSubmitted && validationErrors['code']">
+        <span *ngIf="formSubmitted && validationErrors['code']" class="field-error">
+          {{ validationErrors['code'] }}
+        </span>
+      </div>
+      <div>
+        <label>Name: <span class="required">*</span></label>
+        <input [(ngModel)]="newDepartment.name" name="name" required
+               [class.input-error]="formSubmitted && validationErrors['name']">
+        <span *ngIf="formSubmitted && validationErrors['name']" class="field-error">
+          {{ validationErrors['name'] }}
+        </span>
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea [(ngModel)]="newDepartment.description" name="description"></textarea>
+      </div>
+      <button type="submit" class="btn-success">Save</button>
+      <button type="button" (click)="resetForm()" class="btn-secondary">Cancel</button>
+    </form>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dept of departments">
+          <td>{{ dept.code }}</td>
+          <td>{{ dept.name }}</td>
+          <td>{{ dept.description }}</td>
+          <td>
+            <button (click)="editDepartment(dept)" class="btn-edit">Edit</button>
+            <button (click)="deleteDepartment(dept.id)" class="btn-delete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

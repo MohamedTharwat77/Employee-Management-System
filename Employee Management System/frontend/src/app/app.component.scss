@@ -1,0 +1,54 @@
+.navbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .navbar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+
+    .navbar-title {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .navbar-tabs {
+      display: flex;
+      gap: 10px;
+
+      .tab-btn {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid transparent;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+
+        &.active {
+          background: white;
+          color: #667eea;
+          border-color: white;
+        }
+      }
+    }
+  }
+}
+
+.main-content {
+  background: #f5f5f5;
+  min-height: calc(100vh - 60px);
+  padding: 20px;
+}
